@@ -18,6 +18,7 @@ class GraphVisualization:
 
 root = Tk()
 root.geometry("233x69")
+root.title("GraphMaker")
 
 Label(root, text='Number of vertices').grid(row=0, column = 0, sticky = 'NEWS') 
 Label(root, text='Number of edges').grid(row=1 , column = 0, sticky = "NEWS") 
@@ -26,27 +27,27 @@ e2 = Entry(root, textvariable = IntVar())
 e1.grid(row = 0, column = 1)
 e2.grid(row = 1, column = 1)
 
-
+lst = []
 def new_Window():
 	new_window = Toplevel(root)
+	new_window.title("Enter the Edges")
 	a1 = int(e2.get())
 	x = a1 + 1
-	lst = []
-	arr = []
 	G = GraphVisualization()
 	def generate():
-		for x in lst:
-			i = int(x[0].get())
-			j = int(x[1].get())
+		arr = iter(lst)
+		for x in arr:
+			r = next(arr)
+			i = int(x.get())
+			j = int(r.get())
 			G.addEdge(i, j)
 		G.visualize()
 	for i in range(1, a1 + 1):
 		a = Entry(new_window, textvariable = IntVar())
 		b = Entry(new_window, textvariable = IntVar())
 		Label(new_window, text = 'edge{} = '.format(i)).grid(row = i, column = 0)
-		arr.append(a)
-		arr.append(b)
-		lst = (arr)
+		lst.append(a)
+		lst.append(b)
 		a.grid(row = i, column = 1)
 		b.grid(row = i, column = 2)
 
